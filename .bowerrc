@@ -1,0 +1,4 @@
+{
+	"directory": "app/components/",
+	"post_install": "grunt wiredep"
+}

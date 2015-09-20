@@ -1,0 +1,35 @@
+{
+  "name": "userMgmtMongo",
+  "version": "0.0.0",
+  "authors": [
+    "Dhiraj Gupta <dhiraj.gupta23@gmail.com>"
+  ],
+  "moduleType": [
+    "node"
+  ],
+  "keywords": [
+    "angular",
+    "mongodb",
+    "node",
+    "express",
+    "usermanagement"
+  ],
+  "license": "MIT",
+  "homepage": "index.html",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "app/lib",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "angular": "angularjs#~1.4.6",
+    "angular-route": "~1.4.6",
+    "bootstrap": "~3.3.5",
+    "jquery": "~2.1.4"
+  },
+  "scripts": {
+    "postinstall": "wiredep"
+  }
+}
