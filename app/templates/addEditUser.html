@@ -17,7 +17,8 @@
                 <label>
                     <input ng-model="user.isActive" type="checkbox"> Active</label>
             </div>
-            <button type="button" ng-click="addUser(user)" class="btn btn-default">Submit</button>
+            <button ng-if="mode=='add'" type="button" ng-click="addUser(user)" class="btn btn-default">Add</button>
+            <button ng-if="mode=='edit'" type="button" ng-click="updateUser(user)" class="btn btn-default">Update</button>
         </form>
     </div>
 </div>

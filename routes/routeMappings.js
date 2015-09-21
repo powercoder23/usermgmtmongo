@@ -51,10 +51,10 @@ module.exports = (function() {
 
     function getUID(fname, lname) {
 
-        
+
         var deferred = Q.defer();
         var charCount = 1;
-        
+
         generate();
 
         function generate() {
@@ -81,7 +81,7 @@ module.exports = (function() {
 
     router.route('/user/:id')
         .delete(function(req, res) {
-            
+
             User.find({
                 _id: req.params.id
             }).remove().exec();
@@ -90,8 +90,11 @@ module.exports = (function() {
             });
 
         })
-        .get(function(req, res) {
+        .put(function(req, res) {
 
+            User.findOneAndUpdate({_id:req.params.id}, req.body.user, function (err, user) {
+                res.send(req.body.user);
+            });
         })
 
     return router;

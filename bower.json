@@ -31,5 +31,8 @@
   },
   "scripts": {
     "postinstall": "wiredep"
+  },
+  "devDependencies": {
+    "angular-bootstrap": "~0.13.4"
   }
 }

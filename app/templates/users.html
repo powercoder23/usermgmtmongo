@@ -2,7 +2,7 @@
     <div class="container">
         <a class="btn btn-default" href="#/app/users/add">Add Users</a>
     </div>
-    <table class="table">
+    <table class="table table-striped table-hover">
         <thead>
             <tr>
                 <th>First Name</th>
@@ -16,7 +16,8 @@
                 <td>{{user.firstName}}</td>
                 <td>{{user.lastName}}</td>
                 <td>{{user.uid}}</td>
-                <th><button ng-click="deleteUser(user._id, $index)">Delete</button></th>
+                <th><button class="btn btn-primary" ng-click="editUser(user, $index)">Edit</button>
+                <button class="btn btn-danger" ng-click="deleteUser(user._id, $index)">Delete</button></th>
             </tr>
         </tbody>
     </table>

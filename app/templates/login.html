@@ -1,0 +1,29 @@
+<div class="container">
+    <div modal="showModal" class="modal-dialog" close="cancel()">
+        <div class="modal-content pull-left">
+            <div class="modal-header">
+                <h4>User Management</h4>
+            </div>
+            <div class="modal-body pull-left">
+                <form role="form">
+                    <div class="form-group  col-md-7">
+                        <label for="email">ID</label>
+                        <input type="text" ng-model="login.id" class="form-control" placeholder="ID">
+                    </div>
+                    <div class="form-group  col-md-7">
+                        <label for="pwd">Password</label>
+                        <input type="text" ng-model="login.pass" class="form-control" placeholder="Password">
+                    </div>
+                    <div class="checkbox col-md-12">
+                        <label>
+                            <input ng-model="login.remember" type="checkbox"> Remember me</label>
+                    </div>
+                    <div class="form-group  col-md-7">
+                    <button type="button" class="btn btn-default">Login</button>
+                    <a href="javascript:void(0)" >Forgot Password</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
