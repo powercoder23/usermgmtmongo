@@ -1,24 +1,22 @@
 <div class="container">
     <div class="container">
-        <a class="btn btn-default" href="#" role="button">Link</a>
-        <button class="btn btn-default" type="submit">Button</button>
-        <input class="btn btn-default" type="button" value="Input">
-        <input class="btn btn-default" type="submit" value="Submit">
-        <button class="btn btn-default"  ng-click="gotoAddUser()">Add User</button>
+        <a class="btn btn-default" href="#/app/users/add">Add Users</a>
     </div>
     <table class="table">
         <thead>
             <tr>
-                <th>Name</th>
+                <th>First Name</th>
+                <th>Last Name</th>
                 <th>ID</th>
-                <th></th>
+                <th> </th>
             </tr>
         </thead>
         <tbody>
             <tr ng-repeat="user in users">
                 <td>{{user.firstName}}</td>
+                <td>{{user.lastName}}</td>
                 <td>{{user.uid}}</td>
-                <th><button ng-click="deleteUser(user._id)">Delete</button></th>
+                <th><button ng-click="deleteUser(user._id, $index)">Delete</button></th>
             </tr>
         </tbody>
     </table>

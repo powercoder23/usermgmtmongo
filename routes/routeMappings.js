@@ -2,6 +2,7 @@ var express = require('express');
 
 // Mongoose import
 var mongoose = require('mongoose');
+var Q = require("q");
 
 // Mongoose connection to MongoDB (ted/ted is readonly)
 mongoose.connect('mongodb://localhost:27017/chartnaka', function(error) {
@@ -14,7 +15,8 @@ mongoose.connect('mongodb://localhost:27017/chartnaka', function(error) {
 var Schema = mongoose.Schema;
 var UserSchema = new Schema({
     firstName: String,
-    lastName: String
+    lastName: String,
+    uid: String
 });
 
 // Mongoose Model definition
@@ -32,22 +34,60 @@ module.exports = (function() {
 
     router.route('/user')
         .post(function(req, res) {
-            console.log(req.body.user);
 
-            var user = new User(req.body.user);
-            user.save(function(err, user) {
-                if (err) return console.error(err);
-                res.json(user);
-            });
+            var obj = req.body.user;
+            getUID(obj.firstName, obj.lastName).then(function(id) {
+                console.log('reso');
+                obj.uid = id;
+
+                var user = new User(obj);
+                user.save(function(err, user) {
+                    if (err) return console.error(err);
+                    res.json(user);
+                });
+            })
 
         });
 
+    function getUID(fname, lname) {
+
+        
+        var deferred = Q.defer();
+        var charCount = 1;
+        
+        generate();
+
+        function generate() {
+            var tempUID = fname.substr(0, charCount) + lname;
+            User.find({
+                uid: tempUID.toLowerCase()
+            }, function(err, docs) {
+
+                if (err) {
+                    deferred.reject(err);
+                    return console.error(err);
+                }
+                if (docs.length < 1) {
+                    deferred.resolve(tempUID);
+                } else {
+                    charCount++;
+                    generate();
+                }
+            });
+        }
+
+        return deferred.promise;
+    }
+
     router.route('/user/:id')
         .delete(function(req, res) {
-            console.log(req.params.id);
-
-            User.find({_id:req.params.id}).remove().exec();
-            res.send({message:'ok'});
+            
+            User.find({
+                _id: req.params.id
+            }).remove().exec();
+            res.send({
+                message: 'ok'
+            });
 
         })
         .get(function(req, res) {

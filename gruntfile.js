@@ -4,7 +4,13 @@ module.exports = function(grunt) {
 
         nodemon: {
             dev: {
-                script: 'bin/www'
+                script: 'bin/www',
+                options:{
+                    watch: ['server.js','routes'],
+                    ignore: ['node_modules/**'],
+                    ext: 'js,coffee',
+                    delay: 1000
+                }
             }
         },
 

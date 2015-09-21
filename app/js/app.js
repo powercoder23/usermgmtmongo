@@ -74,10 +74,9 @@ angular.module('usermgmt', ['ngRoute'])
     		$location.path('/app/users/add');
     	}
 
-    	$scope.deleteUser = function(id){
-    		console.log(id);
+    	$scope.deleteUser = function(id, index){
     		UserService.deleteUser(id).then(function(res){
-    			console.log(res)
+                $scope.users.splice(index,1);
     		})
     	}
 

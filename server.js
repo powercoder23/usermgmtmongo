@@ -18,7 +18,6 @@ app.use(express.static(path.join(__dirname, 'app')));
 
 app.use('/', routes);
 
-
 // error handlers
 
 // development error handler
@@ -32,8 +31,5 @@ if (app.get('env') === 'development') {
     });
   });
 }
-
-
-
 
 module.exports = app;
