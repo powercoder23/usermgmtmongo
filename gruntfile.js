@@ -13,14 +13,6 @@ module.exports = function(grunt) {
                 }
             }
         },
-        shell: {
-            mongo: {
-                command: 'sudo mongod',
-            },
-            options:{
-            	async:false
-            }
-        },
 
         wiredep: {
             task: {
@@ -31,13 +23,11 @@ module.exports = function(grunt) {
         }
 
     });
-    grunt.loadNpmTasks('grunt-shell-spawn');
 
     grunt.loadNpmTasks('grunt-nodemon');
     grunt.loadNpmTasks('grunt-wiredep');
     grunt.registerTask('default');
 
     grunt.registerTask('serve', ['nodemon']);
-    grunt.registerTask('mongo', ['shell:mongo:kill']);
 
 };
