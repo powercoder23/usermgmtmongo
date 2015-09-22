@@ -1,5 +1,6 @@
 var express = require('express');
-
+var passport = require('passport');
+var LocalStrategy = require('passport-local').Strategy;
 // Mongoose import
 var mongoose = require('mongoose');
 var Q = require("q");
@@ -16,15 +17,39 @@ var Schema = mongoose.Schema;
 var UserSchema = new Schema({
     firstName: String,
     lastName: String,
+    pass:String,
     uid: String
 });
 
 // Mongoose Model definition
 var User = mongoose.model('users', UserSchema);
 
+
+passport.use(new LocalStrategy(
+  function(username, password, done) {
+    User.findOne({ uid: uid }, function (err, user) {
+      if (err) { return done(err); }
+      if (!user) {
+        return done(null, false, { message: 'Incorrect username.' });
+      }
+      if (!user.validPassword(password)) {
+        return done(null, false, { message: 'Incorrect password.' });
+      }
+      return done(null, user);
+    });
+  }
+));
+
 module.exports = (function() {
     'use strict';
     var router = express.Router();
+
+
+    router.post('/login', passport.authenticate('local'), function(req, res) {
+        // If this function gets called, authentication was successful.
+        // `req.user` contains the authenticated user.
+        res.redirect('/users/');
+    });
 
     router.get('/users', function(req, res) {
         User.find({}, function(err, docs) {
@@ -37,7 +62,8 @@ module.exports = (function() {
 
             var obj = req.body.user;
             getUID(obj.firstName, obj.lastName).then(function(id) {
-                console.log('reso');
+                console.log('id');
+                console.log(id);
                 obj.uid = id;
 
                 var user = new User(obj);
@@ -58,9 +84,9 @@ module.exports = (function() {
         generate();
 
         function generate() {
-            var tempUID = fname.substr(0, charCount) + lname;
+            var tempUID = String(fname.substr(0, charCount) + lname).toLowerCase();
             User.find({
-                uid: tempUID.toLowerCase()
+                uid: tempUID
             }, function(err, docs) {
 
                 if (err) {
