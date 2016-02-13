@@ -12,6 +12,8 @@
     "express": "~4.12.4",
     "jade": "~1.9.2",
     "morgan": "~1.5.3",
+    "passport": "^0.3.2",
+    "passport-local": "^1.0.0",
     "serve-favicon": "~2.2.1"
   },
   "devDependencies": {

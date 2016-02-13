@@ -6,7 +6,7 @@ var mongoose = require('mongoose');
 var Q = require("q");
 
 // Mongoose connection to MongoDB (ted/ted is readonly)
-mongoose.connect('mongodb://localhost:27017/chartnaka', function(error) {
+mongoose.connect('mongodb://admin:root@ds039504.mongolab.com:39504/chartnaka', function(error) {
     if (error) {
         console.log(error);
     }
